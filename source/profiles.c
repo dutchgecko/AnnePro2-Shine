@@ -8,6 +8,39 @@
 static const uint32_t colorPalette[] = {0xcc0000, 0xccc900, 0x5fcc00, 0x00c7cc,
                                         0x006ecc, 0x0033ff, 0x6900cc, 0xcc00bf};
 
+/*
+static const uint32_t c[11] = {
+    0x6600ff,   // 0
+    0x9900ff,   // 1
+    0xcc00ff,   // 2
+    0xff0033,   // 3
+    0xff0066,   // 4
+    0xff0099,   // 5
+    0xff00cc,   // 6
+    0xff3300,   // 7
+    0xff6600,   // 8
+    0xff9900,   // 9
+    0xffffff,   // 10
+};
+*/
+
+/*
+static const uint32_t keycols[NUM_COLUMN * NUM_ROW] = {
+    c[3], c[8], c[8], c[8], c[9], c[9], c[9], c[9], c[9], c[9], c[8], c[8], c[8], c[3],
+    c[4], c[3], c[3], c[3], c[7], c[7], c[7], c[7], c[7], c[3], c[3], c[3], c[3], c[4],
+    c[5], c[5], c[4], c[4], c[4], c[3], c[3], c[3], c[4], c[4], c[4], c[5], c[5], c[10],
+    c[2], c[2], c[2], c[6], c[6], c[6], c[6], c[6], c[6], c[6], c[2], c[2], c[10], c[10],
+    c[0], c[0], c[0], c[1], c[0], c[0], c[0], c[0], c[10], c[10], c[10], c[10], c[10], c[10],
+};
+*/
+static const uint32_t sunset_keycols[NUM_COLUMN * NUM_ROW] = {
+    0xff0033, 0xff3300, 0xff3300, 0xff3300, 0xff6600, 0xff6600, 0xff6600, 0xff6600, 0xff6600, 0xff6600, 0xff3300, 0xff3300, 0xff3300, 0xff0033,
+    0xff0066, 0xff0033, 0xff0033, 0xff0033, 0xff3300, 0xff3300, 0xff3300, 0xff3300, 0xff3300, 0xff0033, 0xff0033, 0xff0033, 0xff0033, 0xff0066,
+    0xff0099, 0xff0099, 0xff0066, 0xff0066, 0xff0066, 0xff0033, 0xff0033, 0xff0033, 0xff0066, 0xff0066, 0xff0066, 0xff0099, 0xff0099, 0xffffff,
+    0xcc00ff, 0xcc00ff, 0xcc00ff, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xcc00ff, 0xcc00ff, 0xcc00ff,
+    0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x9900ff, 0x9900ff, 0x9900ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff,
+};
+
 #define LEN(a) (sizeof(a) / sizeof(*a))
 
 bool red(led_t *currentKeyLedColors, uint8_t intensity) {
@@ -29,6 +62,42 @@ bool miamiNights(led_t *currentKeyLedColors, uint8_t intensity) {
   setAllKeysColor(currentKeyLedColors, 0x00979c, intensity);
   setModKeysColor(currentKeyLedColors, 0x9c008f, intensity);
   return true;
+}
+
+bool sunset(led_t *currentKeyLedColors, uint8_t intensity) {
+
+    /*
+    // colours
+    const uint32_t deeppurple = 0x6600ff;
+    const uint32_t purple = 0x9900ff;
+    const uint32_t deeppink = 0xcc00ff;
+    const uint32_t redpink = 0xff0033;
+    const uint32_t hotpink = 0xff0066;
+    const uint32_t fuchsia = 0xff0099;
+    const uint32_t brightfuchsia = 0xff00cc;
+    const uint32_t bloodorange = 0xff3300;
+    const uint32_t burntorange = 0xff6600;
+    const uint32_t darkyellow = 0xff9900;
+
+    const uint32_t c[11] = {
+        deeppurple,         // 0
+        purple,             // 1
+        deeppink,           // 2
+        redpink,            // 3
+        hotpink,            // 4
+        fuchsia,            // 5
+        brightfuchsia,      // 6
+        bloodorange,        // 7
+        burntorange,        // 8
+        darkyellow,         // 9
+        0xFFFFFF,           // 10
+    };
+    */
+    for (uint16_t i = 0; i < NUM_COLUMN * NUM_ROW; ++i) {
+        setKeyColor(&currentKeyLedColors[i], sunset_keycols[i], intensity);
+    }
+
+    return true;
 }
 
 bool rainbowHorizontal(led_t *currentKeyLedColors, uint8_t intensity) {

@@ -99,6 +99,9 @@ profile profiles[] = {
     {red, {0, 0, 0, 0}, NULL, NULL},
     {green, {0, 0, 0, 0}, NULL, NULL},
     {blue, {0, 0, 0, 0}, NULL, NULL},
+    {miamiNights, {0, 0, 0, 0}, NULL, NULL},
+    {sunset, {0, 0, 0, 0}, NULL, NULL},
+    /*
     {rainbowHorizontal, {0, 0, 0, 0}, NULL, NULL},
     {rainbowVertical, {0, 0, 0, 0}, NULL, NULL},
     {animatedRainbowVertical, {3000, 2000, 1200, 600}, NULL, NULL},
@@ -111,6 +114,7 @@ profile profiles[] = {
      {400, 1600, 1200, 800},
      reactiveFadeKeypress,
      reactiveFadeInit},
+     */
 };
 
 static uint8_t currentProfile = 0;

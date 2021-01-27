@@ -27,3 +27,6 @@ bool reactiveFade(led_t *ledColors, uint8_t intensity);
 void reactiveFadeKeypress(led_t *ledColors, uint8_t row, uint8_t col,
                           uint8_t intensity);
 void reactiveFadeInit(led_t *ledColors);
+
+/* CUSTOM */
+bool sunset(led_t *currentKeyLedColors, uint8_t intensity);
