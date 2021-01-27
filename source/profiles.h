@@ -27,8 +27,11 @@ void reactiveFade(led_t *ledColors, uint8_t intensity);
 void reactiveFadeKeypress(led_t *ledColors, uint8_t row, uint8_t col,
                           uint8_t intensity);
 void reactiveFadeInit(led_t *ledColors);
-
 void reactivePulse(led_t *ledColors, uint8_t intensity);
 void reactivePulseKeypress(led_t *ledColors, uint8_t row, uint8_t col,
                            uint8_t intensity);
 void reactivePulseInit(led_t *ledColors);
+
+
+/* CUSTOM */
+void sunset(led_t *currentKeyLedColors, uint8_t intensity);

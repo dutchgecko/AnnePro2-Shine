@@ -8,6 +8,28 @@
 static const uint32_t colorPalette[] = {0xcc0000, 0xcccc00, 0x5fcc00, 0x00c7cc,
                                         0x006ecc, 0x0033ff, 0x6900cc, 0xcc00bf};
 
+/*
+// colours
+const uint32_t deeppurple = 0x6600ff;
+const uint32_t purple = 0x9900ff;
+const uint32_t deeppink = 0xcc00ff;
+const uint32_t redpink = 0xff0033;
+const uint32_t hotpink = 0xff0066;
+const uint32_t fuchsia = 0xff0099;
+const uint32_t brightfuchsia = 0xff00cc;
+const uint32_t bloodorange = 0xff3300;
+const uint32_t burntorange = 0xff6600;
+const uint32_t darkyellow = 0xff9900;
+*/
+
+static const uint32_t sunset_keycols[NUM_COLUMN * NUM_ROW] = {
+    0xff0033, 0xff3300, 0xff3300, 0xff3300, 0xff6600, 0xff6600, 0xff6600, 0xff6600, 0xff6600, 0xff6600, 0xff3300, 0xff3300, 0xff3300, 0xff0033,
+    0xff0066, 0xff0033, 0xff0033, 0xff0033, 0xff3300, 0xff3300, 0xff3300, 0xff3300, 0xff3300, 0xff0033, 0xff0033, 0xff0033, 0xff0033, 0xff0066,
+    0xff0099, 0xff0099, 0xff0066, 0xff0066, 0xff0066, 0xff0033, 0xff0033, 0xff0033, 0xff0066, 0xff0066, 0xff0066, 0xff0099, 0xff0099, 0xffffff,
+    0xcc00ff, 0xcc00ff, 0xcc00ff, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xcc00ff, 0xcc00ff, 0xcc00ff,
+    0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x9900ff, 0x9900ff, 0x9900ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff,
+};
+
 #define LEN(a) (sizeof(a) / sizeof(*a))
 
 void red(led_t *currentKeyLedColors, uint8_t intensity) {
@@ -25,6 +47,13 @@ void blue(led_t *currentKeyLedColors, uint8_t intensity) {
 void miamiNights(led_t *currentKeyLedColors, uint8_t intensity) {
   setAllKeysColor(currentKeyLedColors, 0x00979c, intensity);
   setModKeysColor(currentKeyLedColors, 0x9c008f, intensity);
+}
+
+void sunset(led_t *currentKeyLedColors, uint8_t intensity) {
+
+    for (uint16_t i = 0; i < NUM_COLUMN * NUM_ROW; ++i) {
+        setKeyColor(&currentKeyLedColors[i], sunset_keycols[i], intensity);
+    }
 }
 
 void rainbowHorizontal(led_t *currentKeyLedColors, uint8_t intensity) {
