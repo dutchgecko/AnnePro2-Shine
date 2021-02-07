@@ -35,3 +35,5 @@ void reactivePulseInit(led_t *ledColors);
 
 /* CUSTOM */
 void sunset(led_t *currentKeyLedColors, uint8_t intensity);
+void sunset_l1(led_t *currentKeyLedColors, uint8_t intensity);
+void sunset_l2(led_t *currentKeyLedColors, uint8_t intensity);

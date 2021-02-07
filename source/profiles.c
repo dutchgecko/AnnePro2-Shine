@@ -8,28 +8,6 @@
 static const uint32_t colorPalette[] = {0xcc0000, 0xcccc00, 0x5fcc00, 0x00c7cc,
                                         0x006ecc, 0x0033ff, 0x6900cc, 0xcc00bf};
 
-/*
-// colours
-const uint32_t deeppurple = 0x6600ff;
-const uint32_t purple = 0x9900ff;
-const uint32_t deeppink = 0xcc00ff;
-const uint32_t redpink = 0xff0033;
-const uint32_t hotpink = 0xff0066;
-const uint32_t fuchsia = 0xff0099;
-const uint32_t brightfuchsia = 0xff00cc;
-const uint32_t bloodorange = 0xff3300;
-const uint32_t burntorange = 0xff6600;
-const uint32_t darkyellow = 0xff9900;
-*/
-
-static const uint32_t sunset_keycols[NUM_COLUMN * NUM_ROW] = {
-    0xff0033, 0xff3300, 0xff3300, 0xff3300, 0xff6600, 0xff6600, 0xff6600, 0xff6600, 0xff6600, 0xff6600, 0xff3300, 0xff3300, 0xff3300, 0xff0033,
-    0xff0066, 0xff0033, 0xff0033, 0xff0033, 0xff3300, 0xff3300, 0xff3300, 0xff3300, 0xff3300, 0xff0033, 0xff0033, 0xff0033, 0xff0033, 0xff0066,
-    0xff0099, 0xff0099, 0xff0066, 0xff0066, 0xff0066, 0xff0033, 0xff0033, 0xff0033, 0xff0066, 0xff0066, 0xff0066, 0xff0099, 0xff0099, 0xffffff,
-    0xcc00ff, 0xcc00ff, 0xcc00ff, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xff00cc, 0xcc00ff, 0xcc00ff, 0xcc00ff,
-    0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x9900ff, 0x9900ff, 0x9900ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff, 0x6600ff,
-};
-
 #define LEN(a) (sizeof(a) / sizeof(*a))
 
 void red(led_t *currentKeyLedColors, uint8_t intensity) {
@@ -47,13 +25,6 @@ void blue(led_t *currentKeyLedColors, uint8_t intensity) {
 void miamiNights(led_t *currentKeyLedColors, uint8_t intensity) {
   setAllKeysColor(currentKeyLedColors, 0x00979c, intensity);
   setModKeysColor(currentKeyLedColors, 0x9c008f, intensity);
-}
-
-void sunset(led_t *currentKeyLedColors, uint8_t intensity) {
-
-    for (uint16_t i = 0; i < NUM_COLUMN * NUM_ROW; ++i) {
-        setKeyColor(&currentKeyLedColors[i], sunset_keycols[i], intensity);
-    }
 }
 
 void rainbowHorizontal(led_t *currentKeyLedColors, uint8_t intensity) {
@@ -230,4 +201,109 @@ void reactivePulseInit(led_t *ledColors) {
     pulseBuf[i] = 80 + i * 5;
   }
   memset(ledColors, 0, NUM_ROW * NUM_COLUMN * 3);
+}
+
+/**************************** CUSTOM *****************************/
+
+/*** Sunset profile, my default ***/
+
+#define DEEPPURPLE    0x6600ff
+#define PURPLE        0x9900ff
+#define DEEPPINK      0xcc00ff
+#define REDPINK       0xff0033
+#define HOTPINK       0xff0066
+#define FUCHSIA       0xff0099
+#define BRIGHTFUCHSIA 0xff00cc
+#define BLOODORANGE   0xff3300
+#define BURNTORANGE   0xff6600
+#define DARKYELLOW    0xff9900
+
+#define DPU DEEPPURPLE
+#define PUR PURPLE
+#define DPI DEEPPINK
+#define RPI REDPINK
+#define HPI HOTPINK
+#define FUC FUCHSIA
+#define BFU BRIGHTFUCHSIA
+#define BLO BLOODORANGE
+#define BUO BURNTORANGE
+#define DKY DARKYELLOW
+#define ___ 0
+
+static const uint32_t sunset_keycols[NUM_COLUMN * NUM_ROW] = {
+/*  ESC   1    2    3    4    5    6    7    8    9    0    -    +    BS */
+    RPI, BLO, BLO, BLO, BUO, BUO, DKY, DKY, BUO, BUO, BLO, BLO, BLO, RPI,
+    HPI, RPI, RPI, RPI, BLO, BLO, BLO, BLO, BLO, RPI, RPI, RPI, RPI, HPI,
+    FUC, FUC, HPI, HPI, HPI, RPI, RPI, RPI, HPI, HPI, HPI, FUC, FUC, ___,
+    DPI, ___, DPI, BFU, BFU, BFU, BFU, BFU, BFU, BFU, BFU, DPI, DPI, ___,
+    DPU, ___, DPU, DPU, ___, ___, PUR, ___, ___, DPU, DPU, DPU, DPU, ___,
+};
+void sunset(led_t *currentKeyLedColors, uint8_t intensity) {
+    for (uint16_t i = 0; i < NUM_COLUMN * NUM_ROW; ++i) {
+        setKeyColor(&currentKeyLedColors[i], sunset_keycols[i], intensity);
+    }
+}
+
+/*** FN1 layer colours ***/
+
+#define GRAVE HOTPINK
+#define FKEYS BURNTORANGE
+#define DELETE HOTPINK
+#define ARROWS PURPLE
+#define SKIPBLOCK PURPLE
+#define SELECTED BURNTORANGE
+
+#define GRV GRAVE
+#define FKY FKEYS
+#define DEL DELETE
+#define ARR ARROWS
+#define BLK SKIPBLOCK
+#define SEL SELECTED
+
+static const uint32_t sunset_l1_keycols[NUM_COLUMN * NUM_ROW] = {
+/*  ESC   1    2    3    4    5    6    7    8    9    0    -    +    BS */
+    GRV, FKY, FKY, FKY, FKY, FKY, FKY, FKY, FKY, FKY, FKY, FKY, FKY, DEL,
+    ___, ___, ARR, ___, ___, ___, ___, ___, ___, ___, BLK, BLK, BLK, ___,
+    ___, ARR, ARR, ARR, ___, ___, ___, ___, ___, ___, BLK, BLK, ___, ___,
+    ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, BLK, BLK, ___, ___,
+    ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, SEL, ___, ___, ___,
+};
+void sunset_l1(led_t *currentKeyLedColors, uint8_t intensity) {
+    for (uint16_t i = 0; i < NUM_COLUMN * NUM_ROW; ++i) {
+        setKeyColor(&currentKeyLedColors[i], sunset_l1_keycols[i], intensity);
+    }
+}
+
+/*** FN2 layer colours ***/
+#define BLUETOOTH PURPLE
+#define LEDOFF REDPINK
+#define LEDON BURNTORANGE
+#define LEDCTRL BURNTORANGE
+#define NUMPAD HOTPINK
+#define SCREENBRIGHTNESS PURPLE
+#define MEDIACTRL BURNTORANGE
+#define MEDIAPLAYER HOTPINK
+// Reuse SELECTED
+
+#define BLT BLUETOOTH
+#define LOF LEDOFF
+#define LON LEDON
+#define LCT LEDCTRL
+#define NUM NUMPAD
+#define BRG SCREENBRIGHTNESS
+#define MCT MEDIACTRL
+#define MPL MEDIAPLAYER
+
+static const uint32_t sunset_l2_keycols[NUM_COLUMN * NUM_ROW] = {
+/*  ESC   1    2    3    4    5    6    7    8    9    0    -    +    BS */
+    ___, BLT, BLT, BLT, BLT, ___, ___, ___, LOF, LON, LCT, LCT, ___, ___,
+    ___, NUM, NUM, NUM, ___, ___, ___, ___, ___, ___, ___, BRG, BRG, ___,
+    ___, NUM, NUM, NUM, ___, ___, ___, ___, ___, MCT, MCT, MCT, MCT, ___,
+    ___, ___, NUM, NUM, NUM, ___, ___, ___, MPL, MCT, MCT, ___, ___, ___,
+    ___, ___, NUM, NUM, ___, ___, ___, ___, ___, ___, ___, SEL, ___, ___,
+};
+void sunset_l2(led_t *currentKeyLedColors, uint8_t intensity) {
+    for (uint16_t i = 0; i < NUM_COLUMN * NUM_ROW; ++i) {
+        setKeyColor(&currentKeyLedColors[i], sunset_l2_keycols[i], intensity);
+    }
 }
